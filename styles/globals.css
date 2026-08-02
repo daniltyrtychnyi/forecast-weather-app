@@ -6,6 +6,19 @@ body {
     height: 100vh;
     font-family: var(--font-family-base);
     color: var(--color-white);
+    background: url('../assets/bg.jpeg') center/cover no-repeat;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: var(--color-dark-15);
+        backdrop-filter: var(--backdrop-filter);
+    }
 }
 
 a,

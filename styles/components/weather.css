@@ -1,0 +1,59 @@
+.weather {
+    --weatherInputPaddingOffsetX: 15px;
+    --weatherButtonSquareSize: 48px;
+
+    width: 325px;
+    height: 500px;
+    padding: 20px;
+    z-index: 1;
+    background-image: linear-gradient(
+        to top,
+        var(--color-dark-15),
+        var(--color-light-15)
+    );
+    border-radius: var(--border-radius);
+    backdrop-filter: var(--backdrop-filter);
+}
+
+.weather__search-city-form {
+    position: relative;
+}
+
+.weather__input {
+    width: 100%;
+    padding: 10px;
+    font-weight: 500;
+    color: var(--color-white);
+    background-color: var(--color-dark-15);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-l);
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-dark-15);
+    }
+
+    &::placeholder {
+        color: var(--color-light-75);
+    }
+
+    &:not(:placeholder-shown) {
+        padding-right: var(--weatherButtonSquareSize);
+    }
+}
+
+.weather__button {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    translate: 0 -50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--weatherButtonSquareSize);
+    height: var(--weatherButtonSquareSize);
+    padding: 0;
+    color: var(--color-white);
+    background-color: transparent;
+    border: none;
+}

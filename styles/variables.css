@@ -1,0 +1,19 @@
+:root {
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+    --color-dark-10: rgb(0 0 0 / 0.1);
+    --color-dark-15: rgb(0 0 0 / 0.15);
+
+    --color-light-10: rgb(255 255 255 / 0.1);
+    --color-light-15: rgb(255 255 255 / 0.15);
+
+    --font-family-base: 'Poppins', sans-serif;
+
+    --backdrop-filter: blur(10px);
+
+    --border-radius: 15px;
+    --border-radius-l: 30px;
+
+    --transition-duration: 0.2s;
+}

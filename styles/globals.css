@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+    font-family: var(--font-family-base);
+    color: var(--color-white);
+}
+
+a,
+button,
+label,
+input,
+svg * {
+    transition-duration: var(--transition-duration);
+}
+
+:focus-visible {
+    outline: 2px dashed var(--color-white);
+    outline-offset: 4px;
+    transition-duration: 0s !important;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    clip-path: inset(100%) !important;
+    clip: rect(0 0 0 0) !important;
+    overflow: hidden !important;
+}

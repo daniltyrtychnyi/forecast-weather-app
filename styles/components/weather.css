@@ -2,6 +2,9 @@
     --weatherInputPaddingOffsetX: 15px;
     --weatherButtonSquareSize: 48px;
 
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
     width: 325px;
     height: 500px;
     padding: 20px;
@@ -56,4 +59,25 @@
     color: var(--color-white);
     background-color: transparent;
     border: none;
+}
+
+.weather__location {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.weather__location-name {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-weight: 600;
+
+    &::before {
+        content: '';
+        width: 30px;
+        height: 30px;
+        background: url('../../assets/icons/geo.svg') center/contain no-repeat;
+    }
 }

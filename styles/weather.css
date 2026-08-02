@@ -16,6 +16,11 @@
     );
     border-radius: var(--border-radius);
     backdrop-filter: var(--backdrop-filter);
+    overflow-y: hidden;
+
+    &:not(.is-load) {
+        height: 88px;
+    }
 }
 
 .weather__search-city-form {
@@ -78,7 +83,7 @@
         content: '';
         width: 30px;
         height: 30px;
-        background: url('../../assets/icons/geo.svg') center/contain no-repeat;
+        background: url('../assets/icons/geo.svg') center/contain no-repeat;
     }
 }
 
@@ -104,4 +109,73 @@
 
 .weather__condition {
     font-size: 24px;
+}
+
+.weather__metrics-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.weather__metrics-item {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.weather__metrics-details {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 5px;
+}
+
+.weather__metrics-value {
+    font-weight: 600;
+}
+
+.weather__forecast-list {
+    display: flex;
+    column-gap: 15px;
+    padding-bottom: 15px;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+        border-radius: var(--border-radius-l);
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: var(--color-dark-15);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-dark-10);
+    }
+}
+
+.weather__forecast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5px;
+    padding: 10px;
+    min-width: 70px;
+    background-color: var(--color-light-10);
+    border-radius: var(--border-radius);
+    transition-duration: var(--transition-duration);
+    user-select: none;
+
+    &:hover {
+        background-color: var(--color-light-15);
+    }
+}
+
+.weather__forecast-date {
+    font-size: 14px;
 }

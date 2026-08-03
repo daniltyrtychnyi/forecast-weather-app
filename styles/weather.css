@@ -2,7 +2,7 @@
     --weatherInputPaddingOffsetX: 15px;
     --weatherButtonSquareSize: 48px;
 
-    width: 325px;
+    width: 335px;
     height: 500px;
     padding: 20px;
     z-index: 1;
@@ -65,19 +65,33 @@
     border: none;
 }
 
+.weather__not-found,
 .weather__wrapper {
     display: flex;
     flex-direction: column;
-    row-gap: 25px;
     opacity: 0;
     scale: 0;
 
-    &.fade-in {
+    &.is-visible {
         animation-name: fade-in;
         animation-fill-mode: forwards;
         animation-duration: var(--transition-duration-long);
         animation-delay: var(--transition-duration-long);
     }
+}
+
+.weather__not-found {
+    align-items: center;
+    row-gap: 20px;
+    text-align: center;
+
+    &:not(.is-visible) {
+        display: none;
+    }
+}
+
+.weather__wrapper {
+    row-gap: 25px;
 }
 
 .weather__location {
@@ -196,7 +210,7 @@
 
 @keyframes fade-in {
     to {
-        opacity: 1;
         scale: 1;
+        opacity: 1;
     }
 }

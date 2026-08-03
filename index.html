@@ -29,17 +29,27 @@
             </svg>
         </button>
     </form>
-    <div class="weather__wrapper" data-js-weather-animation>
+    <div class="weather__not-found" aria-live="polite" data-js-weather-error>
+        <img src="./assets/icons/not-found.svg" alt="" class="weather__not-found-image" width="150" height="150">
+        <h2 class="weather__not-found-title" data-js-weather-error-message></h2>
+    </div>
+    <div class="weather__wrapper" data-js-weather-animation-wrapper>
         <div class="weather__location">
             <span class="weather__location-name" data-js-weather-location-name></span>
-            <time class="weather__location-time" data-js-weather-location-time>Sun, 02 Aug</time>
+            <time class="weather__location-time" data-js-weather-location-date></time>
         </div>
         <div class="weather__current">
-            <img src="./assets/icons/partly-cloudy.svg" alt="" class="weather__icon" width="100" height="100"
-                 data-js-weather-current-icon>
+            <img
+                 src="./assets/icons/partly-cloudy.svg"
+                 alt=""
+                 class="weather__icon"
+                 width="100"
+                 height="100"
+                 data-js-weather-icon
+            >
             <div class="weather__info">
-                <span class="weather__temperature" data-js-weather-current-temperature>29 °C</span>
-                <p class="weather__condition" data-js-weather-current-condition>Cloudy</p>
+                <span class="weather__temperature" data-js-weather-temperature></span>
+                <p class="weather__condition" data-js-weather-condition></p>
             </div>
         </div>
         <dl class="weather__metrics-list">
@@ -47,54 +57,18 @@
                 <img src="./assets/icons/water.svg" alt="" class="weather__metrics-icon" width="32" height="32">
                 <div class="weather__metrics-details">
                     <dt class="weather__metrics-key">Humidity</dt>
-                    <dl class="weather__metrics-value" data-js-weather-humidity>55%</dl>
+                    <dd class="weather__metrics-value" data-js-weather-humidity></dd>
                 </div>
             </div>
             <div class="weather__metrics-item">
                 <img src="./assets/icons/wind.svg" alt="" class="weather__metrics-icon" width="32" height="32">
                 <div class="weather__metrics-details">
                     <dt class="weather__metrics-key">Wind speed</dt>
-                    <dl class="weather__metrics-value" data-js-weather-wind>8 Km/h</dl>
+                    <dd class="weather__metrics-value" data-js-weather-wind></dd>
                 </div>
             </div>
         </dl>
-        <ul class="weather__forecast-list" data-js-weather-forecast-list>
-            <li class="weather__forecast-item">
-                <time class="weather__forecast-date">03 Aug</time>
-                <img src="./assets/icons/partly-cloudy.svg" alt="" class="weather__forecast-icon" width="32"
-                     height="32">
-                <span class="weather__forecast-temperature">29 °C</span>
-            </li>
-            <li class="weather__forecast-item">
-                <time class="weather__forecast-date">03 Aug</time>
-                <img src="./assets/icons/partly-cloudy.svg" alt="" class="weather__forecast-icon" width="32"
-                     height="32">
-                <span class="weather__forecast-temperature">29 °C</span>
-            </li>
-            <li class="weather__forecast-item">
-                <time class="weather__forecast-date">03 Aug</time>
-                <img src="./assets/icons/partly-cloudy.svg" alt="" class="weather__forecast-icon" width="32"
-                     height="32">
-                <span class="weather__forecast-temperature">29 °C</span>
-            </li>
-            <li class="weather__forecast-item">
-                <time class="weather__forecast-date">03 Aug</time>
-                <img src="./assets/icons/partly-cloudy.svg" alt="" class="weather__forecast-icon" width="32"
-                     height="32">
-                <span class="weather__forecast-temperature">29 °C</span>
-            </li>
-            <li class="weather__forecast-item">
-                <time class="weather__forecast-date">03 Aug</time>
-                <img src="./assets/icons/partly-cloudy.svg" alt="" class="weather__forecast-icon" width="32"
-                     height="32">
-                <span class="weather__forecast-temperature">29 °C</span>
-            </li>
-            <li class="weather__forecast-item">
-                <time class="weather__forecast-date">03 Aug</time>
-                <img src="./assets/icons/partly-cloudy.svg" alt="" class="weather__forecast-icon" width="32"
-                     height="32">
-                <span class="weather__forecast-temperature">29 °C</span>
-            </li>
+        <ul class="weather__forecast-list" data-js-weather-forecast>
         </ul>
     </div>
 </main>

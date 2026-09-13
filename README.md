@@ -1,6 +1,6 @@
 # 📝 Forecast Weather App
 
-Приложение "Forecast Weather App", разработанное на HTML, CSS и JavaScript.
+Веб-приложение для поиска города и просмотра текущей погоды и прогноза на 7 дней
 
 ## 🖼️ Дизайн
 
@@ -38,5 +38,7 @@
 
 2. Клонировать репозиторий:
 ```bash
-git clone git@github.com:daniltyrtychnyi/forecast-weather-app/
+git clone https://github.com/daniltyrtychnyi/forecast-weather-app.git
 ```
+
+3. Открыть `index.html`.

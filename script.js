@@ -3,6 +3,7 @@ class Weather {
         root: '[data-js-weather]',
         searchCityForm: '[data-js-weather-search-city-form]',
         searchCityInput: '[data-js-weather-search-city-input]',
+        searchCityButton: '[data-js-weather-search-city-button]',
         error: '[data-js-weather-error]',
         errorMessage: '[data-js-weather-error-message]',
         animationWrapper: '[data-js-weather-animation-wrapper]',
@@ -17,8 +18,14 @@ class Weather {
     }
 
     stateClasses = {
-        isLoad: 'is-load',
+        isLoaded: 'is-loaded',
+        isLoading: 'is-loading',
         isVisible: 'is-visible',
+    }
+
+    API_URLs = {
+        geocoding: 'https://geocoding-api.open-meteo.com/v1/search',
+        forecast: 'https://api.open-meteo.com/v1/forecast',
     }
 
     weatherCodes = {
@@ -87,6 +94,7 @@ class Weather {
         this.rootElement = document.querySelector(this.selectors.root)
         this.searchCityFormElement = this.rootElement.querySelector(this.selectors.searchCityForm)
         this.searchCityInputElement = this.rootElement.querySelector(this.selectors.searchCityInput)
+        this.searchCityButtonElement = this.rootElement.querySelector(this.selectors.searchCityButton)
         this.errorElement = this.rootElement.querySelector(this.selectors.error)
         this.errorMessageElement = this.rootElement.querySelector(this.selectors.errorMessage)
         this.animationWrapperElement = this.rootElement.querySelector(this.selectors.animationWrapper)
@@ -102,7 +110,7 @@ class Weather {
     }
 
     updateUI(location, weather) {
-        this.rootElement.classList.add(this.stateClasses.isLoad)
+        this.rootElement.classList.add(this.stateClasses.isLoaded)
         this.animationWrapperElement.classList.add(this.stateClasses.isVisible)
 
         const {
@@ -139,7 +147,7 @@ class Weather {
         this.setTextContent(this.conditionElement, description)
 
         this.setTextContent(this.humidityElement, `${currentHumidity} %`)
-        this.setTextContent(this.windElement, `${currentWind} Km/h`)
+        this.setTextContent(this.windElement, `${Math.round(currentWind)} Km/h`)
 
         const forecastWeather = dailyForecastWeather.time.map((date, index) => {
             return {
@@ -162,7 +170,7 @@ class Weather {
                 description,
             } = forecastWeatherCondition
 
-           return `
+            return `
             <li class="weather__forecast-item">
                 <time class="weather__forecast-date" datetime="${date}">${this.getFormattedDate(date, dateOptions)}</time>
                 <img src="./assets/icons/${icon}" alt="${description}" class="weather__forecast-icon" width="32"
@@ -174,7 +182,14 @@ class Weather {
     }
 
     async geocodeLocation(location) {
-        const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`)
+        const params = new URLSearchParams({
+            name: location,
+            count: '1',
+            language: 'en',
+            format: 'json',
+        })
+
+        const response = await fetch(`${this.API_URLs.geocoding}?${params}`)
 
         if (!response.ok) {
             throw new Error(`Failed to fetch coordinates ${response.status}`)
@@ -182,7 +197,7 @@ class Weather {
 
         const locationData = await response.json()
 
-        if (locationData.results?.length === 0) {
+        if (!locationData.results?.length) {
             throw new Error('Location not found')
         }
 
@@ -190,9 +205,15 @@ class Weather {
     }
 
     async getWeatherData(location) {
-        const { latitude, longitude } = location
-
-        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=auto&daily=weather_code,temperature_2m_max&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m`)
+        const {latitude, longitude} = location
+        const params = new URLSearchParams({
+            latitude: latitude,
+            longitude: longitude,
+            timezone: 'auto',
+            daily: 'weather_code,temperature_2m_max',
+            current: 'temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m',
+        })
+        const response = await fetch(`${this.API_URLs.forecast}?${params}`)
 
         if (!response.ok) {
             throw new Error(`Failed to fetch weather data ${response.status}`)
@@ -217,7 +238,7 @@ class Weather {
     }
 
     showError(errorMessage) {
-        this.rootElement.classList.add(this.stateClasses.isLoad)
+        this.rootElement.classList.add(this.stateClasses.isLoaded)
         this.errorElement.classList.add(this.stateClasses.isVisible)
         this.animationWrapperElement.classList.remove(this.stateClasses.isVisible)
         this.setTextContent(this.errorMessageElement, errorMessage)
@@ -239,6 +260,9 @@ class Weather {
         }
 
         try {
+            this.searchCityInputElement.disabled = true
+            this.searchCityButtonElement.disabled = true
+            this.searchCityButtonElement.classList.add(this.stateClasses.isLoading)
             const location = await this.geocodeLocation(locationName)
 
             const weather = await this.getWeatherData(location)
@@ -249,13 +273,17 @@ class Weather {
         } catch (error) {
             console.error(error)
 
-            if (error.message === "Location not found") {
-                this.showError('Location not found. Please check enter.')
+            if (error.message === 'Location not found') {
+                this.showError('Location not found. Please check your input.')
 
                 return
             }
 
             this.showError('Something went wrong. Please try again later')
+        } finally {
+            this.searchCityInputElement.disabled = false
+            this.searchCityButtonElement.disabled = false
+            this.searchCityButtonElement.classList.remove(this.stateClasses.isLoading)
         }
     }
 

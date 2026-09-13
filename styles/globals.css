@@ -2,15 +2,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    height: 100vh;
+    padding: 10px;
+    min-height: 100vh;
     font-family: var(--font-family-base);
     color: var(--color-white);
     background: url('../assets/bg.jpeg') center/cover no-repeat;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 
     &::before {
         content: '';

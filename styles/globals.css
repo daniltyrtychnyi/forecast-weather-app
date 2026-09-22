@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    min-height: 100vh;
+    min-height: 100dvh;
     font-family: var(--font-family-base);
     color: var(--color-white);
     background: url('../assets/bg.jpeg') center/cover;

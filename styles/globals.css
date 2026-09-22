@@ -1,4 +1,5 @@
 body {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +7,7 @@ body {
     min-height: 100vh;
     font-family: var(--font-family-base);
     color: var(--color-white);
-    background: url('../assets/bg.jpeg') center/cover no-repeat;
+    background: url('../assets/bg.jpeg') center/cover;
 
     &::before {
         content: '';
